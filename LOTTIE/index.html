@@ -1,0 +1,234 @@
+
+<html lang="en">
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <!--install the script for lottie player-->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+    <!--install the lottie player pointing to the animation-->
+    <lottie-player id="dog" src="https://assets6.lottiefiles.com/packages/lf20_k0tjbci0.json" style="width:400px; height: 400px;">"></lottie-player>
+    
+    <lottie-player id='doc' src="ska.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;" loop ></lottie-player>
+    <lottie-player id="story" src="https://assets6.lottiefiles.com/packages/lf20_CGBC5zgP4g.json" style="width:400px; height: 400px;">"></lottie-player>
+    <lottie-player id="hamster" src="https://assets7.lottiefiles.com/packages/lf20_Lybh7B/data.json" style="width:400px; height: 400px;">"></lottie-player>
+    <lottie-player id="siri" src="https://assets1.lottiefiles.com/packages/lf20_PmGV4skHBv.json" style="width:400px; height: 400px;">"></lottie-player>
+    
+    <lottie-player id="nd" src="https://assets4.lottiefiles.com/temp/lf20_H4cN7k.json" style="width:400px; height: 400px;">"></lottie-player>
+    <lottie-player id="plants" src="https://assets2.lottiefiles.com/packages/lf20_rK1iJW.json" style="width:400px; height: 400px;">"></lottie-player>
+    <lottie-player id="explodingOrange" src="https://assets4.lottiefiles.com/packages/lf20_azckpvdu.json" style="width:400px; height: 400px;">"></lottie-player>
+
+    <!--Install the interactivity script for lottie too-->
+    <script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
+<wrapper> 
+<head>   
+
+
+<!--ON CLICK-->
+<script>
+    //The name of the player ie: 'dog' in this example is the ID set to the lottie web component on the html page.
+
+LottieInteractivity.create({
+    player:'#dog',
+    //cursor refers to where the scrolling of the animation will be synced to the cursor position within the container.
+    mode:"cursor",
+    //This object takes an array (A list of values pretty much) in lotties case, predefined actions which consists of an array of objects.
+    
+    //Multiple objects can be added into this array and therefore multiple actions such as "seek","play", "stop" and "loop", can be set.
+   
+    //Each object has a start and end which is essentially a percentage for the height of the lottie container and is a value between 0 and 1.    
+    
+
+    actions: [
+        {  
+            //The visibility array is an array of two values which is the start and end of the visibility of the animation.
+            visibility: [0, 0.5],
+            type: "click",
+            //forces the animation to play from the beginning when clicked.
+            forceFlag: true
+
+        }
+    ]
+});
+</script>
+
+
+<!--Scroll animate-->
+<script>
+    LottieInteractivity.create({
+    //The name of the player ie: 'doc' in this example is the ID set to the lottie web component on the html page.
+
+    player:'#doc',
+    
+    //"scroll" where the animation will be synced to the scrolling of the window
+    mode:"scroll",
+     //Multiple objects can be added into this array and therefore multiple actions such as "seek","play", "stop" and "loop", can be set.
+
+        actions: [
+        {
+            // Each object has a start and end which is essentially a percentage for the height of the lottie container. The visibility arrays first value is the start and the second value is the end. This refers to the percentage of the viewport.
+            visibility:[0, 1.0],
+            //The seek action is used to set the frame of the animation to a specific frame.
+            type: "seek",
+            //The frames array is an array of two values which is the start and end of the frames of the animation.
+            frames: [100, 0],
+        },
+        ]
+    });
+    </script>
+
+
+<!--Sync animation with cursor position-->
+<script>
+    LottieInteractivity.create({
+        player: "#story",
+        // Looking for the mouse position
+        mode:"cursor",
+        actions: [
+            {
+                position: { x: [0, 1], y: [0, 1] },
+                type: "seek",
+                frames: [0, 300]
+            }
+        ]
+    });
+    </script>
+
+<!--Sync animation with cursor position-->
+<script>
+    LottieInteractivity.create({
+        player: '#hamster',
+        mode: 'cursor',
+        actions: [
+            {
+                //These values make the mouse move horizontally
+                position: { x: [0, 1], y: [-1, 2] },
+                type: 'seek',
+                frames: [0, 180],
+            }
+        ]
+    });
+    </script>
+    
+    <!--Play animation with hover-->
+    <script>
+        LottieInteractivity.create({
+            player:'#siri',
+            mode:"cursor",
+            actions: [
+                {
+                    type: "hover",
+                    forceFlag: false
+                }
+            ]
+        });
+    </script>
+
+        <!--Toggle animation-->
+        <script>
+        LottieInteractivity.create({
+            player:'#nd',
+            mode:"cursor",
+            actions: [
+                {
+                    type: "toggle"
+                }
+        ]
+        });
+        </script>
+   
+
+       <!--Play animation on hold (Can change state to pauseHold)--> 
+
+        <script>
+            LottieInteractivity.create({
+                player:'#plants',
+                mode:"cursor",
+                actions: [
+                    {
+                        type: "hold"
+                    }
+                ]
+            });
+            </script>
+
+
+        <!--Chain animations-->
+        <script>
+            LottieInteractivity.create({
+                player:'#explodingOrange',
+                mode:"chain",
+                actions: [
+                    {
+                        state: 'loop',
+                        transition: 'click',
+                        path: 'https://assets5.lottiefiles.com/packages/lf20_rmpmxft3.json'
+                    },
+                    {
+                        state: 'autoplay',
+                        transition: 'onComplete',
+                        frames:[0,80],
+                        path: 'https://assets3.lottiefiles.com/datafiles/UMSCdaMgjwzpkDF/data.json'
+                    },
+                    {
+                        state: 'autoplay',
+                        transition: 'onComplete',
+                        path: 'https://assets4.lottiefiles.com/packages/lf20_azckpvdu.json',
+                        reset: true
+                    }
+                ]
+            });
+            </script>
+            <script>
+            LottieInteractivity.create({
+                player:'#syncPlayer',
+                mode:"chain",
+                actions: [
+                    {
+                        state: 'none',
+                        position: { x: [0, 1], y: [-1, 2] },
+                        transition: 'seek',
+                        frames: [0, 30],
+                    },
+                    {
+                        state: 'autoplay',
+                        transition: 'none',
+                        frames: [30, 160],
+                    },
+                ]
+            });
+            </script>
+            <script>
+                LottieInteractivity.create({
+                    player:'#syncPlayer',
+                    mode:"chain",
+                    actions: [
+                        {
+                            state: 'none',
+                            position: { x: [0, 1], y: [-1, 2] },
+                            transition: 'seek',
+                            frames: [0, 30],
+                        },
+                        {
+                            state: 'autoplay',
+                            transition: 'none',
+                            frames: [30, 160],
+                        },
+                    ]
+                });
+                </script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<body>
+
+    <section id="blog">
+
+
+    </section>
+    
+</body>
+</wrapper>
+</html>
